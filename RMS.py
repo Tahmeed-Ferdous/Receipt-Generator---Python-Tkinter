@@ -4,6 +4,7 @@ import random
 from datetime import datetime
 from tkinter import messagebox
 import sys
+
 def main():
     win=Tk()
     app=LoginPage(win)
@@ -14,7 +15,7 @@ class LoginPage:
         self.win=win
         self.win.geometry('1350x950+0+0')
         self.win.title('Restaurant Management System')
-        self.win.configure(bg='#FFFBEB')
+        self.win.config(bg='#FFFBEB')
         self.title_label=Label(self.win, text='Restaurant Management System',fg='#914F1E',font=('Arial', 25, 'bold'), bd=20, bg='#FFE7CC')
         self.title_label.pack(side=TOP,fill=X)
 
@@ -25,26 +26,26 @@ class LoginPage:
         self.login=Label(self.main_frame, text='Login', bd=15, anchor=CENTER, bg='#F8CBA6',fg='#FFFBEB', font=('sans-serif', 25, 'bold'))
         self.login.pack(side=TOP, fill=X)
 
-        self.entry_frame=LabelFrame(self.main_frame, text='Enter Details',relief='solid',highlightbackground='#F8CBA6',bd=2,bg='#FFFBEB',fg='#F8CBA6',font=('sans-serif',15))
+        self.entry_frame=LabelFrame(self.main_frame, text='',relief=FLAT,highlightbackground='#F8CBA6',bd=2,bg='#FFE7CC',fg='#914F1E',font=('sans-serif',15))
         self.entry_frame.pack(fill=BOTH,expand=TRUE)
 
         username=StringVar()
         password=StringVar()
 
         # Quotes
-        self.quote=Label(self.main_frame, text="username:'tahmeed', pass:'1234'", bd=2, bg='#FFFBEB', anchor=CENTER,fg='#F8CBA6', font=('sans-serif', 12, 'bold'))
-        self.quote.place(x=255,y=390,width=300,height=15)
+        self.quote=Label(self.main_frame, text="username:'tahmeed', pass:'1234'", bd=4, bg='#FFFBEB', anchor=CENTER,fg='#F8CBA6', font=('sans-serif', 12, 'bold'))
+        self.quote.place(x=247,y=390,width=300,height=25)
 
         # Inputs
 
-        self.entry=Label(self.entry_frame, text='Enter Username',bd=15,fg='#914F1E',bg='#FFFBEB',anchor=CENTER, font=('sans-serif',16))
+        self.entry=Label(self.entry_frame, text='Enter Username',bd=15,fg='#914F1E',bg='#FFE7CC',anchor=CENTER, font=('sans-serif',16),pady=10)
         self.entry.pack(side=TOP,fill=X)
-        self.entry0=Entry(self.entry_frame, font=('sans-serif', 15), relief=SUNKEN, textvariable=username)
+        self.entry0=Entry(self.entry_frame, font=('sans-serif', 15),bd=2, relief=SUNKEN, textvariable=username)
         self.entry0.pack(side=TOP)
 
-        self.entry=Label(self.entry_frame, text='Password',bd=15,bg='#FFFBEB',anchor=CENTER, fg='#914F1E',font=('sans-serif',16))
+        self.entry=Label(self.entry_frame, text='Password',bd=15,bg='#FFE7CC',anchor=CENTER, fg='#914F1E',font=('sans-serif',16), pady=2)
         self.entry.pack(side=TOP,fill=X)
-        self.entry0=Entry(self.entry_frame, font=('sans-serif', 15), relief=SUNKEN, textvariable=password, show='*')
+        self.entry0=Entry(self.entry_frame, font=('sans-serif', 15),bd=2, relief=SUNKEN, textvariable=password, show='*')
         self.entry0.pack(side=TOP)
 
         # Function
@@ -53,7 +54,7 @@ class LoginPage:
             if username.get()=='tahmeed' and password.get()=='1234':
                 self.bill.config(state='normal')
             else:
-                pass # Message box
+                messagebox.showerror('Error!','Try again!')
         def reset():
             username.set('')
             password.set('')
@@ -65,17 +66,17 @@ class LoginPage:
 
         # Buttons
 
-        self.button_frame=LabelFrame(self.entry_frame, text='Options',font=('Arial', 12),bg='#FFFBEB',fg='#F8CBA6',bd=2,relief='solid')
-        self.button_frame.place(x=240,y=190,width=315,height=130)
+        self.button_frame=LabelFrame(self.entry_frame, text='',font=('Arial', 12),bg='#FFE7CC',fg='#F8CBA6',bd=2,relief=FLAT)
+        self.button_frame.place(x=235,y=215,width=315,height=130)
 
-        self.bill=Button(self.button_frame, text='Billing', bd=5, bg='#F8CBA6',fg='#FFFBEB', font=('sans-serif', 12, 'bold'), command=billing)
+        self.bill=Button(self.button_frame, text='Billing', bd=3, bg='#F8CBA6',fg='#FFFBEB', font=('sans-serif', 12, 'bold'), command=billing)
         self.bill.grid(row=0,column=0,padx=20,pady=10)
         self.bill.config(state='disabled') # disable it when necessary
 
-        self.login_info=Button(self.button_frame, text='Login', bd=5, bg='#F8CBA6',fg='#FFFBEB', font=('sans-serif', 18, 'bold'), command=check_login)
+        self.login_info=Button(self.button_frame, text='Login', bd=3, bg='#F8CBA6',fg='#FFFBEB', font=('sans-serif', 18, 'bold'), command=check_login)
         self.login_info.grid(row=0,column=1,padx=2,pady=10)
 
-        self.reset=Button(self.button_frame, text='Reset', bd=5, bg='#F8CBA6',fg='#FFFBEB', font=('sans-serif', 12, 'bold'), command=reset)
+        self.reset=Button(self.button_frame, text='Reset', bd=3, bg='#F8CBA6',fg='#FFFBEB', font=('sans-serif', 12, 'bold'), command=reset)
         self.reset.grid(row=0,column=2,padx=20,pady=10)
 
 
@@ -177,11 +178,11 @@ class Window2:
 
         def genbill():
             if cus_num=='' and cus_con=='':
-                messagebox.showerror('Error! Please enter all the fields')
+                messagebox.showerror('Error!','Please enter all the fields')
             else:
                 self.bill_text.insert(END, f'\nCustomer Name: {cus_num.get()}')
-                self.bill_text.insert(END, f'\nCustomer Name: {cus_con.get()}')
-                self.bill_text.insert(END, f'\nCustomer Name: {date.get()}')
+                self.bill_text.insert(END, f'\nCustomer Contact: {cus_con.get()}')
+                self.bill_text.insert(END, f'\nDate: {date.get()}')
                 self.bill_text.insert(END, '\n==========================================================================================')
                 self.bill_text.insert(END,'\nProduct\t\t          Quantity          \t\tCost\t\t             Total')
                 self.bill_text.insert(END, '\n==========================================================================================')
@@ -191,7 +192,7 @@ class Window2:
 
         def addfunc():
             if item_pur.get()=='' and item_quan.get()=='':
-                messagebox.showerror('Error! Please fill all the fields')
+                messagebox.showerror('Error!','Please fill all the fields')
             else:
                 tot=int(item_quan.get())*int(cost.get())
                 total_list.append(tot)
@@ -231,10 +232,16 @@ class Window2:
                         con.write(self.bill_content)
                     messagebox.showinfo('Success!', f'Bill {bill_no_tk.get()} has been saved successfully!')
                     con.close()
+                    self.newWindow=Toplevel(self.win)
+                    self.app=Window2(self.newWindow)
                 except Exception as e:
                     messagebox.showerror("Error 404")
             else:
                 return
+            
+        def game():
+            self.newWindow=Toplevel(self.win)
+            self.app=Window3(self.newWindow)
             
 
         # Button
@@ -257,7 +264,7 @@ class Window2:
         self.clear=Button(self.button_frame, bd=2,bg='#FFFBEB', text='Clear',font=('Arial',12), width=12,height=3, command=clearfunc)
         self.clear.grid(row=1,column=2,padx=4,pady=2)
 
-        self.play=Button(self.button_frame, bd=2,bg='#FFFBEB', text='Play Game',font=('Arial',15))
+        self.play=Button(self.button_frame, bd=2,bg='#FFFBEB', text='Play Game',font=('Arial',15), command=game)
         self.play.grid(row=2,column=1,padx=5,pady=10)
         self.play.place(x=10,y=155,width=360,height=100)
 
@@ -348,7 +355,7 @@ class Window2:
 
         # Bill
 
-        self.bill_frame=LabelFrame(self.win,text='Bill Info', font=('Arial',15), bg='#FFE7CC', bd=1, relief=SOLID)
+        self.bill_frame=LabelFrame(self.win,text='Bill Info', font=('Arial',15), bg='#FFE7CC', bd=1, relief=FLAT)
         self.bill_frame.place(x=540,y=420,width=745,height=370)
 
         self.y_scroll=Scrollbar(self.bill_frame, orient='vertical')
@@ -361,7 +368,52 @@ class Window2:
         default_bill()
         
 
+class Window3:
+    def __init__(self, win):
+        self.win=win
+        self.win.geometry('1350x950+0+0')
+        self.win.title('Restaurant Management System')
+        self.win.configure(bg='#FFFBEB')
 
+        self.title_label=Label(self.win, text='Number Guessing Game',fg='#914F1E',font=('Arial', 25, 'bold'), bd=20, bg='#FFE7CC')
+        self.title_label.pack(side=TOP,fill=X)
+
+        self.main_frame=Frame(self.win, bg='#FFFBEB')
+        self.main_frame.place(x=265, y=210, width=800, height=470)
+        self.login=Label(self.main_frame, text='Guess the Number (1-5)', bd=15, anchor=CENTER, bg='#F8CBA6',fg='#FFFBEB', font=('sans-serif', 25, 'bold'))
+        self.login.pack(side=TOP, fill=X)
+
+        self.entry_frame=LabelFrame(self.main_frame, text='Enter Details',relief='solid',highlightbackground='#F8CBA6',bd=2,bg='#FFFBEB',fg='#F8CBA6',font=('sans-serif',15))
+        self.entry_frame.pack(fill=BOTH,expand=TRUE)
+
+        player=StringVar()
+        computer=StringVar()
+        computer.set(random.randint(1,5))
+
+        # Inputs
+
+        self.entry=Label(self.entry_frame, text='Your Number',bd=20,fg='#914F1E',bg='#FFFBEB',anchor=CENTER, font=('sans-serif',16))
+        self.entry.pack(side=TOP,fill=X)
+        self.entry0=Entry(self.entry_frame, font=('sans-serif', 15), relief=SUNKEN, textvariable=player)
+        self.entry0.pack(side=TOP)
+
+        self.entry=Label(self.entry_frame, text='Computer',bd=20,bg='#FFFBEB',anchor=CENTER, fg='#914F1E',font=('sans-serif',16))
+        self.entry.pack(side=TOP,fill=X)
+        self.entry0=Entry(self.entry_frame, font=('sans-serif', 15), relief=SUNKEN, textvariable=computer, show='*')
+        self.entry0.pack(side=TOP)
+
+
+
+        def check():
+            if player.get()==computer.get():
+                messagebox.showinfo('Match', f"it's a Match. The Numer was {computer.get()}")
+            else:
+                messagebox.showinfo('Error!',f'You lose. The Numer was {computer.get()}. Now get back to work')
+                self.newWindow=Toplevel(self.win)
+                self.app=Window2(self.newWindow)
+
+        self.login_info=Button(self.entry_frame, text='Check', bd=5, bg='#F8CBA6',fg='#FFFBEB', font=('sans-serif', 18, 'bold'), command=check)
+        self.login_info.place(x=340,y=230, width=100, height=50)
 
 
 
